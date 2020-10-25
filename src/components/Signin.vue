@@ -9,7 +9,7 @@
       <label>パスワード</label>
       <input type="text" placeholder="Password" v-model="password" />
     </div>
-    <button @click="userSingIn">ログイン</button><br>
+    <button>ログイン</button><br>
     <router-link to="/Signup">新規登録はこちら</router-link>
   </div>
 </template>

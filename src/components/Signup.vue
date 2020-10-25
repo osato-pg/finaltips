@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import firebase from "../firebase.js";
+
 export default {
   name: "singup",
   data() {
@@ -30,7 +32,17 @@ export default {
   },
   methods:{
     createUserAccount() {
-      this.$router.push("/Mypage")
+       firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.name, this.email, this.password)
+        .then(() => {
+          alert("Create Account");
+          this.$router.push("/Mypage")
+        })
+        .catch(error => {
+          alert("Error!", error.message);
+          console.error("Account Regeister Error", error.message);
+        });
     }
   }
 };
