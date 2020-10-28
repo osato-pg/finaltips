@@ -16,11 +16,11 @@
 
 <script>
 export default {
-  name: "singin",
+  name: 'singin',
   data() {
     return {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     };
   }
 };

@@ -19,30 +19,46 @@
 </template>
 
 <script>
-import firebase from "../firebase.js";
 
 export default {
-  name: "singup",
-  data() {
-    return {
-      name: "",
-      email: "",
-      password: ""
-    };
+  computed: {
+    name: {
+      get() {
+      return this.$store.getters.name;
+    },
+      set(value){
+        this.$store.commit({type:'updateState',name:value})
+      }
+    },
+    email: {
+      get() {
+      return this.$store.getters.email;
+    },
+      set(value){
+        this.$store.commit({type:'updateState',email:value})
+      }
+    },
+    password: {
+      get() {
+      return this.$store.getters.password;
+    },
+      set(value){
+        this.$store.commit({type:'updateState',passwprd:value})
+      }
+    }
   },
   methods:{
     createUserAccount() {
-       firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.name, this.email, this.password)
-        .then(() => {
-          alert("Create Account");
-          this.$router.push("/Mypage")
-        })
-        .catch(error => {
-          alert("Error!", error.message);
-          console.error("Account Regeister Error", error.message);
-        });
+      this.$store.dispatch('createUserAccount',this.email, this.password)
+      //  firebase
+      //   .auth()
+      //   .createUserWithEmailAndPassword(this.email, this.password)
+      //   .then(() => {
+      //     this.$router.push('/Mypage')
+      //   })
+      //   .catch(error => {
+      //     console.error('Account Regeister Error', error.message);
+      //   });
     }
   }
 };

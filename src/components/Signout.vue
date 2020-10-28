@@ -7,6 +7,6 @@
 
 <script>
 export default {
-  name: "singout"
+  name: 'singout'
 };
 </script>
