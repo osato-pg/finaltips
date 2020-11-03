@@ -43,22 +43,14 @@ export default {
       return this.$store.getters.password;
     },
       set(value){
-        this.$store.commit({type:'updateState',passwprd:value})
+        this.$store.commit({type:'updateState',password:value})
       }
     }
   },
   methods:{
     createUserAccount() {
-      this.$store.dispatch('createUserAccount',this.email, this.password)
-      //  firebase
-      //   .auth()
-      //   .createUserWithEmailAndPassword(this.email, this.password)
-      //   .then(() => {
-      //     this.$router.push('/Mypage')
-      //   })
-      //   .catch(error => {
-      //     console.error('Account Regeister Error', error.message);
-      //   });
+      this.$store.dispatch('createUserAccount',{email:this.email, password:this.password})
+      this.$router.push({ path: 'Mypage' });
     }
   }
 };
