@@ -23,17 +23,25 @@ export default new Vuex.Store({
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(() => {
-          
-        })
+        .then(() => {})
         .catch(error => {
           console.error('Account Regeister Error', error.message);
+        });
+    },
+    userSignIn(state, { email, password }) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
         });
     },
   },
   actions: {
     createUserAccount({ commit }, { email, password }) {
       commit('createUserAccount', { email: email, password: password });
+    },
+    userSignIn({ commit }, { email, password }) {
+      commit('userSignIn', { email: email, password: password });
     },
   },
 });
