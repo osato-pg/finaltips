@@ -23,7 +23,9 @@ export default new Vuex.Store({
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
-        .then(() => {})
+        .then(() => {
+          console.log('登録が完了しました')
+        })
         .catch(error => {
           console.error('Account Regeister Error', error.message);
         });
@@ -33,6 +35,7 @@ export default new Vuex.Store({
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
+          console.log('ログイン成功しました')
         });
     },
   },
