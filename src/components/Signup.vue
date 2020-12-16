@@ -49,7 +49,7 @@ export default {
   },
   methods:{
     createUserAccount() {
-      this.$store.dispatch('createUserAccount',{email: this.email, password: this.password})
+      this.$store.dispatch('createUserAccount',{email: this.email, password: this.password},this.name)
       this.$router.push({ path: 'Mypage' });
     }
   }
