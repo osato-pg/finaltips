@@ -26,37 +26,42 @@ export default new Vuex.Store({
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then(() => {
-          db.collection("users").add({
+          db.collection('users').add({
             name: this.state.name,
             email: email,
-            password: password
-        })
+            password: password,
+          });
         })
         .catch(error => {
           console.error('Account Regeister Error', error.message);
         });
     },
-    userSignIn(state, { email, password}) {
+    signIn(state, { email, password }) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then(() => {
-          db.collection("users").get().then((querySnapshot) =>{
-            querySnapshot.forEach((doc)=> {
-                if(doc.data().email == email){
-                  this.state.name=doc.data().name
-                }
+          db.collection('users')
+            .where('email', '==', email)
+            .get()
+            .then(querySnapshot => {
+              querySnapshot.forEach(doc => {
+                state.name = doc.data().name;
+              });
             });
-        });
+        })
+        .catch(error => {
+          alert('Error!', error.message);
+          console.error('Account Login Error', error.message);
         });
     },
   },
   actions: {
-    createUserAccount({ commit }, { email, password}) {
+    createUserAccount({ commit }, { email, password }) {
       commit('createUserAccount', { email: email, password: password });
     },
-    userSignIn({ commit }, { email, password}) {
-      commit('userSignIn', { email: email, password: password});
+    signIn({ commit }, { email, password }) {
+      commit('signIn', { email: email, password: password });
     },
   },
 });
