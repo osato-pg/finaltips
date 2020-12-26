@@ -21,7 +21,9 @@ export default new Vuex.Store({
     updateState(state, newState) {
       Object.assign(state, newState);
     },
-    createUserAccount(state, { email, password }) {
+  },
+  actions: {
+    createUserAccount(context, { email, password }) {
       firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
@@ -36,7 +38,7 @@ export default new Vuex.Store({
           console.error('Account Regeister Error', error.message);
         });
     },
-    signIn(state, { email, password }) {
+    signIn({ commit }, { email, password }) {
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -46,7 +48,7 @@ export default new Vuex.Store({
             .get()
             .then(querySnapshot => {
               querySnapshot.forEach(doc => {
-                state.name = doc.data().name;
+                commit({ type: 'updateState', name: doc.data().name });
               });
             });
         })
@@ -54,14 +56,6 @@ export default new Vuex.Store({
           alert('Error!', error.message);
           console.error('Account Login Error', error.message);
         });
-    },
-  },
-  actions: {
-    createUserAccount({ commit }, { email, password }) {
-      commit('createUserAccount', { email: email, password: password });
-    },
-    signIn({ commit }, { email, password }) {
-      commit('signIn', { email: email, password: password });
     },
   },
 });
