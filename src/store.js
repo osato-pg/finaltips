@@ -11,6 +11,7 @@ export default new Vuex.Store({
     name: '',
     email: '',
     password: '',
+    wallet: '',
   },
   getters: {
     name: state => state.name,
@@ -32,6 +33,7 @@ export default new Vuex.Store({
             name: this.state.name,
             email: email,
             password: password,
+            wallet: 500,
           });
         })
         .catch(error => {
@@ -49,6 +51,7 @@ export default new Vuex.Store({
             .then(querySnapshot => {
               querySnapshot.forEach(doc => {
                 commit({ type: 'updateState', name: doc.data().name });
+                commit({ type: 'updateState', wallet: doc.data().wallet });
               });
             });
         })
