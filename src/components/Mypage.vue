@@ -14,10 +14,10 @@
 export default {
   computed: {
     name() {
-      return this.$store.state.name;
+      return this.$store.getters.name;
     },
     wallet() {
-      return this.$store.state.wallet;
+      return this.$store.getters.wallet;
     },
   },
   methods: {

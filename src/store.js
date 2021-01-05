@@ -17,6 +17,7 @@ export default new Vuex.Store({
     name: state => state.name,
     email: state => state.email,
     password: state => state.password,
+    wallet: state => state.wallet,
   },
   mutations: {
     updateState(state, newState) {
