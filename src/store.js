@@ -67,6 +67,8 @@ export default new Vuex.Store({
         .signOut()
         .then(() => {
           commit({ type: 'updateState', name: '' });
+          commit({ type: 'updateState', email: '' });
+          commit({ type: 'updateState', password: '' });
           commit({ type: 'updateState', wallet: '' });
         })
         .catch(error => {
