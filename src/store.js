@@ -12,12 +12,14 @@ export default new Vuex.Store({
     email: '',
     password: '',
     wallet: '',
+    userInfo: [],
   },
   getters: {
     name: state => state.name,
     email: state => state.email,
     password: state => state.password,
     wallet: state => state.wallet,
+    userInfo: state => state.userInfo,
   },
   mutations: {
     updateState(state, newState) {
@@ -59,6 +61,19 @@ export default new Vuex.Store({
         .catch(error => {
           alert('Error!', error.message);
           console.error('Account Login Error', error.message);
+        });
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+          db.collection('users')
+            .get()
+            .then(querySnapshot => {
+              querySnapshot.forEach(doc => {
+                if(doc.data().email != email)
+               this.state.userInfo.push(doc.data().name);
+              });
+            });
         });
     },
     signOut({ commit }) {
