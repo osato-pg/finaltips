@@ -22,6 +22,7 @@ export default {
   },
   methods: {
     SignOut() {
+      this.$store.dispatch('signOut');
       this.$router.push('/');
     },
   },
