@@ -70,10 +70,13 @@ export default new Vuex.Store({
             .get()
             .then(querySnapshot => {
               querySnapshot.forEach(doc => {
-                if(doc.data().email != email)
-               this.state.userInfo.push(doc.data().name);
+                if (doc.data().email !== email) this.state.userInfo.push(doc.data().name);
               });
             });
+        })
+        .catch(error => {
+          alert('Error!', error.message);
+          console.error('Account Login Error', error.message);
         });
     },
     signOut({ commit }) {
