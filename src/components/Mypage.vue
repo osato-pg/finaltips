@@ -8,7 +8,7 @@
     <button @click="SignOut">ログアウト</button>
     <p>ユーザー名</p>
     <ul>
-      <li v-for="(value, index) in userInfo" :key="index">
+      <li v-for="(value, index) in users" :key="index">
         {{ value }}
         <div>
           <button>wallet残高を見る</button>
@@ -28,8 +28,8 @@ export default {
     wallet() {
       return this.$store.getters.wallet;
     },
-    userInfo() {
-      return this.$store.getters.userInfo;
+    users() {
+      return this.$store.getters.users;
     },
   },
   methods: {
