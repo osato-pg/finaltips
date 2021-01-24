@@ -7,6 +7,15 @@
     <h1>ユーザー一覧</h1>
     <button @click="SignOut">ログアウト</button>
     <p>ユーザー名</p>
+    <ul>
+      <li v-for="(value, index) in users" :key="index">
+        {{ value }}
+        <div>
+          <button>wallet残高を見る</button>
+          <button>送る</button>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -18,6 +27,9 @@ export default {
     },
     wallet() {
       return this.$store.getters.wallet;
+    },
+    users() {
+      return this.$store.getters.users;
     },
   },
   methods: {
@@ -33,5 +45,15 @@ export default {
 .top-information {
   display: flex;
   justify-content: space-between;
+}
+
+li {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  border-radius: 10px;
 }
 </style>
