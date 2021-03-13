@@ -9,7 +9,7 @@
     <p>ユーザー名</p>
     <ul>
       <li v-for="(value, index) in users" :key="index">
-        {{ value }}
+        {{ value['usersName'] }}
         <div>
           <button>wallet残高を見る</button>
           <button>送る</button>

@@ -70,7 +70,10 @@ export default new Vuex.Store({
             .get()
             .then(querySnapshot => {
               querySnapshot.forEach(doc => {
-                if (doc.data().email !== email) this.state.users.push(doc.data().name);
+                if (doc.data().email !== email) {
+                  const users_data = { usersName: doc.data().name, usersWallet: doc.data().wallet };
+                  this.state.users.push(users_data);
+                }
               });
             });
         })
@@ -88,6 +91,7 @@ export default new Vuex.Store({
           commit({ type: 'updateState', email: '' });
           commit({ type: 'updateState', password: '' });
           commit({ type: 'updateState', wallet: '' });
+          commit({ type: 'updateState', users: [] });
         })
         .catch(error => {
           alert(error);
